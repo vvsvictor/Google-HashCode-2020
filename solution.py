@@ -1,1 +1,0 @@
-print("L'IMPORTANT ES PARTICIPAR!")
