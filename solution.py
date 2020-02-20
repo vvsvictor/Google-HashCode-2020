@@ -2,14 +2,20 @@ class Book:
     def __init__(self, id, score, cont):
         self.id = id
         self.score = score
-        self.cont = cont # vector<Lib>: són les llibreries que el contenen
 
 class Lib:
-    def __init__(self, id, signup, ship, available):
+    def __init__(self, id, size, books, signup, ship, available):
         self.id = id
+        self.size = size
+        self.books = books # vector<book>
         self.signup = signup
         self.ship = ship
         self.available = available
+
+def scorelib(lib):
+    total = 0
+    for x in lib.books:
+
 
 f = open('a.txt', 'r')
 l1 = f.readline()
