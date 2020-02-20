@@ -33,8 +33,7 @@ l2 = l2.replace('\n', '')
 l2 = l2.split(' ')
 vectorllibres = [] # vector amb tots els llibres
 for x in range(len(l2)):
-    library = [] #vector de llibreries que el contenen (per defecte vuit)
-    book = Book(x, int(l2[x]), library)
+    book = Book(x, int(l2[x]))
     vectorllibres.append(book)
 print("Tots el llibres :")
 for x in vectorllibres:
@@ -47,10 +46,16 @@ for x in range(l):
     l3 = f.readline()
     l3 = l3.replace('\n', '')
     l3 = l3.split(' ')
+    booksv = []  # vector de llibres per la llibreria
+    for i in range(len(l3)):
+        bookv = (l3[0], 0)#IMPORTANT Falta scoreee
+        booksv.append(bookv)
     n = int(l3[0]) #numero de llibres a la llibreria
     t = int(l3[1]) # nombre de dies (ship)
     m = int(l3[2]) # nombre de llibres cada dia
     l4 = f.readline()
     l4 = l4.replace('\n', '')
     nbooks = l4.split(' ') # vector amb el id dels llibres --> ves en compte has d'utilitzar int()
-    llibreria = Lib(x, )
+
+    llibreria = Lib(x, n, booksv,t, m, False)
+    print("Llibreria: n= "+str(n)+" t = "+str(t)+" m= "+str(m))
