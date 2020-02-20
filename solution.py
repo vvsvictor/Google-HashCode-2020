@@ -105,15 +105,14 @@ for x in range(l):
     l3 = l3.replace('\n', '')
     l3 = l3.split(' ')
     booksv = []  # vector de llibres per la llibreria
-    for i in range(len(l3)):
-        booksv.append(vectorllibres[int(l3[i])])
     n = int(l3[0]) #numero de llibres a la llibreria
     t = int(l3[1]) # nombre de dies (ship)
     m = int(l3[2]) # nombre de llibres cada dia
     l4 = f.readline()
     l4 = l4.replace('\n', '')
     nbooks = l4.split(' ') # vector amb el id dels llibres --> ves en compte has d'utilitzar int()
-
+    for i in range(len(nbooks)):
+        booksv.append(vectorllibres[int(nbooks[i])])
     llibreria = Lib(x, n, booksv,t, m)
     print("Llibreria: n= "+str(n)+" t = "+str(t)+" m= "+str(m))
     vectorllibreries.append(llibreria)
