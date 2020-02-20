@@ -57,11 +57,18 @@ def wanted(books, book):
             return True
     return False
 
-def print_lib(lib):
+def print_lib(lib, w):
+    w.write(str(lib.id)+" "+str(len(lib.books)))
     print(lib.id, end=' ')
     print(len(lib.books))
-    for book in lib.books:
-        print(book.id, end=' ')
+    w.write("\n")
+    for i in range(len(lib.books)):
+        if i!=len(lib.books)-1:
+            w.write(str(lib.books[i].id)+' ')
+        else:
+            w.write(str(lib.books[i].id))
+        print(lib.books[i].id, end=' ')
+    w.write("\n")
     print()
 
 seleccio = input("Quin test case proves: ")
@@ -119,7 +126,9 @@ for x in range(l):
 
 vectorllibreries = sort_by_scorelib(vectorllibreries)
 vectorllibreries = cut_libraries(vectorllibreries, d)
-
+w = open("out.txt", "w")
+w.write(str(len(vectorllibreries)))
+w.write("\n")
 print(len(vectorllibreries))
 
 for lib in vectorllibreries:
@@ -130,4 +139,4 @@ for lib in vectorllibreries:
             output.append(lib.books[i])
             vectorllibres.remove(lib.books[i])
     lib.books = output
-    print_lib(lib)
+    print_lib(lib, w)
