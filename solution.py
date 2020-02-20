@@ -1,5 +1,5 @@
 class Book:
-    def __init__(self, id, score, cont):
+    def __init__(self, id, score):
         self.id = id
         self.score = score
 
@@ -27,6 +27,19 @@ def score_comp(book):
 def sort_books(books):
     books.sort(key=score_comp, reverse=True)
     return books
+
+def wanted(books, book):
+    iz = 0
+    de = len(books) - 1
+    while (iz <= de):
+        mid = int((iz + de) / 2)
+        if (books[mid].id == book.id):
+            return True
+        elif (books[mid].id < book.id):
+            de = mid - 1
+        else:
+            iz = mid + 1
+    return False
 
 f = open('a.txt', 'r')
 l1 = f.readline()
@@ -58,7 +71,7 @@ for x in range(l):
     l3 = l3.split(' ')
     booksv = []  # vector de llibres per la llibreria
     for i in range(len(l3)):
-        booksv.append(vectorllibres[l3[i]])
+        booksv.append(vectorllibres[int(l3[i])])
     n = int(l3[0]) #numero de llibres a la llibreria
     t = int(l3[1]) # nombre de dies (ship)
     m = int(l3[2]) # nombre de llibres cada dia
@@ -68,6 +81,7 @@ for x in range(l):
 
     llibreria = Lib(x, n, booksv,t, m)
     print("Llibreria: n= "+str(n)+" t = "+str(t)+" m= "+str(m))
+    vectorllibreries.append(llibreria)
 
 vectorllibreries = sort_by_scorelib(vectorllibreries)
 diasignup = vectorllibreries[0].signup
@@ -82,7 +96,11 @@ for dia in range(d):
     for lib in lib_disp:
         if (len(lib.books) < lib.ship):
             for i in range(len(lib.books)):
-                print(lib.books.pop(0))
+                book = lib.books.pop(0)
+                if (not wanted(vectorllibres, book)):
+                    print(book)
         else:
             for i in range(lib.ship):
-                print(lib.books.pop(0))
+                book = lib.books.pop(0)
+                if (not wanted(vectorllibres, book)):
+                    print(book)
