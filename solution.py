@@ -15,7 +15,8 @@ class Lib:
 def scorelib(lib):
     total = 0
     for x in lib.books:
-
+        total += x.score
+    return ((total/lib.ship) + lib.signup)
 
 f = open('a.txt', 'r')
 l1 = f.readline()
