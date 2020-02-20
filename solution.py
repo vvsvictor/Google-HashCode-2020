@@ -18,6 +18,10 @@ def scorelib(lib):
         total += x.score
     return ((total/lib.ship) + lib.signup)
 
+def sort_by_scorelib(libraries):
+    libraries.sort(key=scorelib, reverse=True)
+
+
 f = open('a.txt', 'r')
 l1 = f.readline()
 l1 = l1.replace('\n', '')
