@@ -4,7 +4,9 @@ class Book:
         self.score = score
 
 class Lib:
-    def __init__(self, books, signup, ship):
-        self.books = books
+    def __init__(self, books, size, signup, ship):
+        self.books = books # vector<Book>
+        self.size = size
         self.signup = signup
         self.ship = ship
+
