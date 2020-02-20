@@ -21,14 +21,24 @@ def sort_by_scorelib(libraries):
     libraries.sort(key=scorelib, reverse=True)
     return libraries
 
+def cut_libraries(libraries, d):
+    total = 0
+    definitive = []
+    while ((total < d) and len(libraries) != 0):
+        lib = libraries.pop(0)
+        total += lib.signup
+        if (total < d):
+            definitive.append(lib)
+    return definitive
+
 def score_comp(book):
     return book.score
 
-def sort_books(books):
-    books.sort(key=score_comp, reverse=True)
-    return books
+def sort_lib_books(library):
+    library.books.sort(key=score_comp, reverse=True)
+    return library
 
-def wanted(books, book):
+def wanted_bo(books, book):
     iz = 0
     de = len(books) - 1
     while (iz <= de):
@@ -41,7 +51,32 @@ def wanted(books, book):
             iz = mid + 1
     return False
 
-f = open('a.txt', 'r')
+def wanted(books, book):
+    for x in books:
+        if (book.id == x.id):
+            return True
+    return False
+
+def print_lib(lib):
+    print(lib.id, end=' ')
+    print(len(lib.books))
+    for book in lib.books:
+        print(book.id, end=' ')
+    print()
+
+seleccio = input("Quin test case proves: ")
+if (seleccio == 'a'):
+    f = open('a.txt', 'r')
+elif (seleccio == 'b'):
+    f = open('b.txt', 'r')
+elif (seleccio == 'c'):
+    f = open('c.txt', 'r')
+elif (seleccio == 'd'):
+    f = open('d.txt', 'r')
+elif (seleccio == 'e'):
+    f = open('e.txt', 'r')
+elif (seleccio == 'f'):
+    f = open('f.txt', 'r')
 l1 = f.readline()
 l1 = l1.replace('\n', '')
 l1 = l1.split(' ')
@@ -84,23 +119,16 @@ for x in range(l):
     vectorllibreries.append(llibreria)
 
 vectorllibreries = sort_by_scorelib(vectorllibreries)
-diasignup = vectorllibreries[0].signup
-lib_disp = [] #llibreries que ja HAN FET SIGNUP (es treuen de vectorllibreries)
+vectorllibreries = cut_libraries(vectorllibreries, d)
 
-for dia in range(d):
-    if (dia == diasignup):
-        my_lib = vectorllibreries.pop(0)
-        my_lib.books = sort_books(my_lib.books)
-        lib_disp.append(my_lib) #movem la llibreria a les disponibles
-        print(str(lib_disp[len(lib_disp) - 1]))
-    for lib in lib_disp:
-        if (len(lib.books) < lib.ship):
-            for i in range(len(lib.books)):
-                book = lib.books.pop(0)
-                if (not wanted(vectorllibres, book)):
-                    print(book)
-        else:
-            for i in range(lib.ship):
-                book = lib.books.pop(0)
-                if (not wanted(vectorllibres, book)):
-                    print(book)
+print(len(vectorllibreries))
+
+for lib in vectorllibreries:
+    lib = sort_lib_books(lib)
+    output = []
+    for i in range(len(lib.books)):
+        if wanted(vectorllibres, lib.books[i]):
+            output.append(lib.books[i])
+            vectorllibres.remove(lib.books[i])
+    lib.books = output
+    print_lib(lib)
