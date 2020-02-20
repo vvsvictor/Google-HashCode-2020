@@ -88,11 +88,8 @@ l1 = f.readline()
 l1 = l1.replace('\n', '')
 l1 = l1.split(' ')
 b = int(l1[0]) #nombre de llibres diferents
-print(str(b)+": llibres diferents")
 l = int(l1[1]) #nombre de llibreries
-print(str(l)+": num llibreries")
 d = int(l1[2]) # nombre de dies
-print(str(d)+": num dies")
 l2 = f.readline()
 l2 = l2.replace('\n', '')
 l2 = l2.split(' ')
@@ -100,10 +97,6 @@ vectorllibres = [] # vector amb tots els llibres
 for x in range(len(l2)):
     book = Book(x, int(l2[x]))
     vectorllibres.append(book)
-print("Tots el llibres :")
-for x in vectorllibres:
-    print("id del llibre: " + str(x.id))
-    print("score del llibre: " + str(x.score))
 vectorllibreries = []
 for x in range(l):
 
@@ -121,7 +114,6 @@ for x in range(l):
     for i in range(len(nbooks)):
         booksv.append(vectorllibres[int(nbooks[i])])
     llibreria = Lib(x, n, booksv,t, m)
-    print("Llibreria: n= "+str(n)+" t = "+str(t)+" m= "+str(m))
     vectorllibreries.append(llibreria)
 
 vectorllibreries = sort_by_scorelib(vectorllibreries)
